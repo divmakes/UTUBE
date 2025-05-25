@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Downloader</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Youtube</h1>
+    <nav>
+     <div class="elements"><a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="bgsize">
+ <div class="download-section">
+  <h2>Download Your Video</h2>
+  <h3>Paste the link below and download YouTube videos for free</h3>
+<form class="download-form" onsubmit="event.preventDefault(); fetchVideoInfo();">
+  <input type="text" id="videoUrl" placeholder="Paste YouTube URL..." required />
+  <div id="videoInfo" style="display: none; margin-top: 15px;">
+    <img id="thumbnail" src="" alt="Thumbnail" style="width: 200px; border-radius: 10px;" />
+    <h3 id="videoTitle"></h3>
+    <p>Select resolution:</p>
+    <div id="resolutionButtons" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+  </div>
+  <div id="loader" class="spinner" style="display: none;"></div>
+  <div id="message" style="margin-top: 10px;"></div>
+</form>
+
+
+  </form>
+</div>
+</main>
+<div class="divbox">
+  <p class="pone">Welcome to blabla—your ultimate,completely free YouTube downloader that puts the power of offline viewing right at your fingertips. Whether you’re saving educational tutorials, music videos, inspirational talks, or memorable moments, blabla delivers lightning-fast downloads in just a few simple steps. No subscriptions, no hidden fees, and no complicated setups—just paste your link, click “Download,” and watch your favorite content anytime, anywhere. 
+ </p>
+<!-- Features Section -->
+<section id="features-section">
+  <div class="features-grid">
+    
+    <!-- Feature 1 -->
+    <div class="feature-box" id="feature-free">
+      <img src="free.png" alt="Free Icon" class="feature-icon">
+      <h3 class="feature-title">100% Free to Use</h3>
+      <p class="feature-desc">
+        No subscriptions, no fees, no catches—our service is entirely free and open for everyone to enjoy, now and forever.
+      </p>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-box" id="feature-fast">
+      <img src="lightning.png" alt="Fast Icon" class="feature-icon">
+      <h3 class="feature-title">Lightning-Fast Retrieval</h3>
+      <p class="feature-desc">
+        Experience near-instant downloads, as we process and deliver your requested files in mere seconds.
+      </p>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-box" id="feature-custom-1">
+      <img src="your-icon3.png" alt="Custom Icon" class="feature-icon">
+      <h3 class="feature-title">User-Friendly Interface</h3>
+      <p class="feature-desc">
+        Navigate and use our platform with ease, thanks to a clean and intuitive interface built for everyone.
+      </p>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="feature-box" id="feature-custom-2">
+      <img src="your-icon4.png" alt="Custom Icon" class="feature-icon">
+      <h3 class="feature-title">No Registration Required</h3>
+      <p class="feature-desc">
+        Access all features instantly without needing to sign up or log in—hassle-free experience.
+      </p>
+    </div>
+
+    <!-- Feature 5 -->
+    <div class="feature-box" id="feature-custom-3">
+      <img src="your-icon5.png" alt="Custom Icon" class="feature-icon">
+      <h3 class="feature-title">Secure & Private</h3>
+      <p class="feature-desc">
+        Your privacy matters. We never store or share your data—what you download stays yours.
+      </p>
+    </div>
+
+    <!-- Feature 6 -->
+    <div class="feature-box" id="feature-custom-4">
+      <img src="your-icon6.png" alt="Custom Icon" class="feature-icon">
+      <h3 class="feature-title">24/7 Availability</h3>
+      <p class="feature-desc">
+        Our service is available around the clock. Download anytime, anywhere, without limits.
+      </p>
+    </div>
+
+  </div>
+</section>
+</div>
+<!-- Why Use Us Section -->
+<section id="why-us-section">
+  <h2 class="why-title">Why Use Us?</h2>
+  <div class="qa-container">
+
+    <!-- Q1 -->
+    <div class="qa-box">
+      <button class="qa-question">Is your service really free?</button>
+      <div class="qa-answer">
+        <p>Yes! Our platform is 100% free with no hidden charges or subscriptions required.</p>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qa-box">
+      <button class="qa-question">Do I need to sign up?</button>
+      <div class="qa-answer">
+        <p>No signup is needed. You can start using our service immediately—no registration or email required.</p>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qa-box">
+      <button class="qa-question">Is my data private?</button>
+      <div class="qa-answer">
+        <p>Absolutely. We don’t track, store, or sell any personal information. Your privacy is our priority.</p>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qa-box">
+      <button class="qa-question">Can I access it anytime?</button>
+      <div class="qa-answer">
+        <p>Yes, our service is available 24/7 with no limits. Use it anytime you need.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <footer>
+    &copy; 2025 Video Downloader. All rights reserved.
+  </footer>
+<script>
+ function startDownload(event) {
+  event.preventDefault();
+  const urlInput = document.getElementById("videoUrl").value;
+  const resolution = document.getElementById("resolution").value;
+  const loader = document.getElementById("loader");
+  const message = document.getElementById("message");
+
+  loader.style.display = "block";
+  message.textContent = "";
+
+  fetch("http://127.0.0.1:5000/download", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ video_url: videoUrl, resolution: resolution })
+})
+
+  
+   .then(response => response.json())
+    .then(data => {
+      loader.style.display = "none";
+      if (data.success) {
+        message.innerHTML = `✅ <a href="${data.download_url}" target="_blank" download>Click here to download your video</a>`;
+      } else {
+        message.textContent = `❌ Error: ${data.message}`;
+        message.style.color = "red";
+      }
+    })
+    .catch(error => {
+      loader.style.display = "none";
+      message.textContent = `❌ Error: ${error}`;
+      message.style.color = "red";
+    });
+}
+
+</script>
+
+  <script>
+  document.querySelectorAll('.qa-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling;
+      const isOpen = answer.style.display === 'block';
+      document.querySelectorAll('.qa-answer').forEach(a => a.style.display = 'none');
+      answer.style.display = isOpen ? 'none' : 'block';
+    });
+  });
+</script>
+<script>
+  function fetchVideoInfo() {
+    const videoUrl = document.getElementById("videoUrl").value;
+    const videoInfo = document.getElementById("videoInfo");
+    const loader = document.getElementById("loader");
+    const message = document.getElementById("message");
+    const titleEl = document.getElementById("videoTitle");
+    const thumbEl = document.getElementById("thumbnail");
+    const btnContainer = document.getElementById("resolutionButtons");
+
+    message.textContent = "";
+    videoInfo.style.display = "none";
+    loader.style.display = "block";
+
+    fetch("http://127.0.0.1:5000/video_info", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ video_url: videoUrl })
+    })
+    .then(res => res.json())
+    .then(data => {
+      loader.style.display = "none";
+      if (data.success) {
+        videoInfo.style.display = "block";
+        titleEl.textContent = data.title;
+        thumbEl.src = data.thumbnail;
+
+        btnContainer.innerHTML = "";
+        data.resolutions.forEach(res => {
+          const btn = document.createElement("button");
+          btn.textContent = `${res}p`;
+          btn.className = "res-btn";
+          btn.onclick = () => startDownload(videoUrl, res);
+          btnContainer.appendChild(btn);
+        });
+      } else {
+        message.textContent = data.message;
+        message.style.color = "red";
+      }
+    })
+    .catch(err => {
+      loader.style.display = "none";
+      message.textContent = "❌ Error: " + err.message;
+      message.style.color = "red";
+    });
+  }
+
+  function startDownload(videoUrl, resolution) {
+    const loader = document.getElementById("loader");
+    const message = document.getElementById("message");
+
+    loader.style.display = "block";
+    message.textContent = "";
+
+    fetch("http://127.0.0.1:5000/video_info", ... {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ video_url: videoUrl, resolution: resolution })
+    })
+    .then(res => res.json())
+    .then(data => {
+      loader.style.display = "none";
+      if (data.success) {
+        message.innerHTML = `✅ <a href="${data.download_url}" target="_blank" download>Click here to download (${resolution}p)</a>`;
+        message.style.color = "green";
+      } else {
+        message.textContent = data.message;
+        message.style.color = "red";
+      }
+    })
+    .catch(err => {
+      loader.style.display = "none";
+      message.textContent = "❌ Error: " + err.message;
+      message.style.color = "red";
+    });
+  }
+</script>
+
+
+</body>
+</html>

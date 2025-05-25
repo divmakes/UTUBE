@@ -1,0 +1,493 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffdcdc;
+  color: #333;
+}
+
+header {
+  background: #ff0000;
+  color: white;
+  padding: 10px 0 10px 300px;
+  text-align: left;
+}
+  .site-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #ff0000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    width: 50px;
+    height: auto;
+    margin-right: 12px;
+  }
+
+  .site-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .site-name {
+      font-size: 18px;
+    }
+
+    .logo {
+      width: 40px;
+    }
+  }
+
+header h1 {
+  font-size: 2rem;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.elements {
+  padding: 0 500px 0 400px;
+  margin-bottom: 10px;
+  margin-top: -20px;
+}
+
+main {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+/* Download Section */
+.download-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  margin: 40px auto;
+}
+.input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.input-container input[type="text"] {
+  flex: 1;
+  min-width: 250px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-container .paste-btn {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #ff0000;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-container .paste-btn:hover {
+  background-color: #d0d0d0;
+}
+
+.input-container button[type="submit"] {
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #ff0000;
+  color: rgb(233, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-container button[type="submit"]:hover {
+  background-color: #cc0000;
+}
+
+.download-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.download-section h3 {
+  font-size: 1rem;
+  font-weight: 100;
+  margin-bottom: 25px;
+}
+
+/* Download Form */
+.download-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.download-form input {
+  width: 100%;
+  max-width: 600px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.download-form button {
+  padding: 12px 20px;
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.download-form button:hover {
+  background-color: #cc0000;
+}
+
+#resolutionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+#resolutionButtons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  min-width: 100px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  display: none; /* Hide initially */
+  transition: background-color 0.3s ease;
+}
+
+#resolutionButtons button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  #resolutionButtons button {
+    min-width: 80px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+#loader {
+  font-weight: bold;
+  color: blue;
+}
+
+.spinner {
+  border: 4px solid #eee;
+  border-top: 4px solid #0080ff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: spin 1s linear infinite;
+  margin-top: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#message {
+  font-size: 16px;
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header {
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .elements {
+    padding: 0 20px;
+  }
+
+  .download-form {
+    flex-direction: column;
+  }
+
+  .download-form input {
+    width: 100%;
+  }
+
+  .download-form button {
+    width: 100%;
+  }
+}
+
+/* Features Section */
+#features-section {
+  padding: 40px 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.feature-box {
+  flex: 1 1 250px;
+  max-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.feature-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .feature-box {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-title {
+    font-size: 1rem;
+  }
+
+  .feature-desc {
+    font-size: 0.9rem;
+  }
+
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.feature-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Why Use Us Section */
+#why-us-section {
+  padding: 40px 20px;
+  background-color: #ffffff;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.why-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+.qa-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.qa-box {
+  background: hsl(0, 0%, 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.qa-question {
+  width: 100%;
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.qa-question:hover {
+  background-color: #f7f7f7;
+}
+
+.qa-answer {
+  display: none;
+  padding: 15px 20px;
+  font-size: 14px;
+  color: #444;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #333;
+  color: white;
+}
+
+#text1 {
+  background-color: #ffffff; /* ✅ White background */
+  color: #333;
+  font-size: 1rem;
+  font-family: 'Trebuchet MS', sans-serif;
+  text-align: center;
+  max-width: 800px;
+  margin: 50px auto; /* ✅ Centered on PC */
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+#text1 p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* ✅ Mobile responsiveness */
+@media (max-width: 600px) {
+  #text1 {
+    padding: 20px 15px;
+    margin: 20px 10px;
+    font-size: 0.95rem;
+  }
+}
+.selected-res {
+  background-color: #007BFF;
+  color: white;
+  border: 2px solid #0056b3;
+}
+/* Red Download Button Positioned at Bottom */
+#downloadButton {
+  margin-top: 20px;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#downloadButton:hover {
+  background-color: #cc0000;
+}
+
+/* Position after resolution buttons */
+#resolutionButtons + #downloadButton {
+  margin-top: 30px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  #downloadButton {
+    width: 90%;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #downloadButton {
+    font-size: 0.95rem;
+    padding: 12px 20px;
+  }
+}
+footer a {
+  color: white;
+  text-decoration: none; /* optional: removes underline */
+}
+
+footer a:hover {
+  text-decoration: underline; /* optional: adds underline on hover */
+}
