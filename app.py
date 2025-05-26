@@ -37,7 +37,6 @@ def video_info():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
-
 @app.route('/download', methods=['POST'])
 def download():
     data = request.get_json()
@@ -63,12 +62,12 @@ def download():
         ydl_opts = {
             'format': format_code,
             'outtmpl': output_path,
-            'noplaylist': True
+            'noplaylist': True,
+            'quiet': True
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            info_dict = ydl.download([video_url])
-            info_dict = ydl.extract_info(video_url, download=False)
+            info_dict = ydl.extract_info(video_url, download=True)
             final_filename = ydl.prepare_filename(info_dict)
             final_filename_only = os.path.basename(final_filename)
 
@@ -79,7 +78,6 @@ def download():
 
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
-
 
 @app.route('/downloads/<path:filename>')
 def serve_file(filename):
