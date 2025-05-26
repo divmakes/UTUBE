@@ -51,25 +51,35 @@ def download():
         with youtube_dl.YoutubeDL({'quiet': True}) as ydl:
             info = ydl.extract_info(video_url, download=False)
             title = secure_filename(info.get("title", "video"))
-            filename = f"{title}_{resolution}p.mp4"
 
+        if resolution == "best":
+            filename_template = f"{title}.%(ext)s"
+        else:
+            filename_template = f"{title}_{resolution}p.%(ext)s"
+
+        output_path = f"downloads/{filename_template}"
         format_code = f"bestvideo[height<={resolution}]+bestaudio/best[height<={resolution}]" if resolution != "best" else "best"
 
         ydl_opts = {
             'format': format_code,
-            'outtmpl': f'downloads/{filename}',
+            'outtmpl': output_path,
             'noplaylist': True
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([video_url])
+            info_dict = ydl.download([video_url])
+            info_dict = ydl.extract_info(video_url, download=False)
+            final_filename = ydl.prepare_filename(info_dict)
+            final_filename_only = os.path.basename(final_filename)
 
         return jsonify({
             "success": True,
-            "download_url": request.host_url.rstrip('/') + f"/downloads/{filename}"
+            "download_url": request.host_url.rstrip('/') + f"/downloads/{final_filename_only}"
         })
+
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
+
 
 @app.route('/downloads/<path:filename>')
 def serve_file(filename):
