@@ -13,7 +13,7 @@
     loader.style.display = "block";
     btnContainer.style.display = "none";
 
-   fetch("https://utube-2-asol.onrender.com/video_info", {
+   fetch("https://utube-2-asol.onrender.com/video_info", { ... }) 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ video_url: videoUrl })
