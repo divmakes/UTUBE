@@ -66,7 +66,7 @@ def download():
 
         return jsonify({
             "success": True,
-            "download_url": f"{request.host_url}downloads/{filename}"
+            "download_url": request.host_url.rstrip('/') + f"/downloads/{filename}"
         })
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
