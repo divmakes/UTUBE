@@ -75,7 +75,7 @@
     loader.style.display = "block";
     message.textContent = "";
 
-    fetch("http://127.0.0.1:5000/download", {
+   fetch("https://utube-2-asol.onrender.com/download", { ... })
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ video_url: videoUrl, resolution: resolution })
