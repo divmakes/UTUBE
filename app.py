@@ -66,7 +66,7 @@ def download():
 
         return jsonify({
             "success": True,
-            "download_url": f"http://127.0.0.1:5000/downloads/{filename}"
+            "download_url": f"{request.host_url}downloads/{filename}"
         })
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
